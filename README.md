@@ -26,6 +26,7 @@ customer_360_snowflake/
 │           ├── staging/        # Base layer: Raw data cleansing & standardization
 │           ├── intermediate/   # Logic layer: Aggregations, risk profiles, financial summaries
 │           └── marts/          # Presentation layer: Business-ready tables (Executive, Marketing)
+```
 
 # 📊 Data Modeling Architecture (dbt Models)
 
