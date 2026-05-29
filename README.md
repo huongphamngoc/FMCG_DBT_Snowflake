@@ -32,12 +32,6 @@ customer_360_snowflake/
 
 The project follows a layered dbt architecture to ensure maintainability, scalability, and clear separation of concerns.
 
-### Seeds (`dags/dbt/.../seeds/`)
-Static reference data loaded directly into Snowflake as tables. These are used to enrich transactional data with standardized dimensions without hardcoding values in SQL.
-* **Key Domains:** `age_cohorts`, `country_risk_ratings`, `credit_score_ranges`, `currency_codes`, `marketing_segments`.
-
----
-
 ### Staging Layer (`models/staging`)
 
 The foundational layer. Models here typically maintain a 1:1 relationship with raw source tables. The primary goal is data cleansing and standardization: renaming columns for consistency, casting data types, handling `NULL` values, and removing exact duplicates.
@@ -78,6 +72,12 @@ These models are consumed directly by:
 * Reporting tools
 * Data analysts
 * Business stakeholders
+
+---
+
+### Seeds (`dags/dbt/.../seeds/`)
+Static reference data loaded directly into Snowflake as tables. These are used to enrich transactional data with standardized dimensions without hardcoding values in SQL.
+* **Key Domains:** `age_cohorts`, `country_risk_ratings`, `credit_score_ranges`, `currency_codes`, `marketing_segments`.
 
 ---
 
