@@ -10,6 +10,8 @@ SELECT
     "Discount" AS Discount,
     "TotalPrice" AS TotalPrice,
     COALESCE("SalesDate", '1200-01-01 00:00:00.000'::TIMESTAMP_NTZ) AS SalesDate,
+    CAST(SalesDate AS DATE) AS SALES_DATE,
+    CAST(SalesDate AS TIME) AS SALES_TIME,
     CASE 
         WHEN "SalesDate" IS NULL THEN 'Data_Error' 
         ELSE 'Valid' 

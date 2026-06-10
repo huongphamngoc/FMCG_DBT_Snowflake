@@ -25,7 +25,8 @@ SELECT
     -- ==========================================
     s.SalesID,
     s.TransactionNumber,       -- Used to count the number of invoices (Basket Size, AOV, Customer Segment)
-    s.SalesDate,               -- The date and specific time frame for the transaction.
+    s.SALES_DATE AS SalesDate,               -- The date and specific time frame for the transaction.
+    s.SALES_TIME AS SalesTime,               -- The time of day for the transaction, used for time-based analysis (e.g., peak hours).
     EXTRACT(month FROM s.SalesDate) AS SalesMonth, -- Standard timeline for monthly trend analysis
     EXTRACT(year FROM s.SalesDate) AS SalesYear,   -- Standard timeline for yearly trend analysis
 
