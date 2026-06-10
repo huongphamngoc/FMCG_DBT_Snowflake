@@ -26,10 +26,11 @@ SELECT
     s.SalesID,
     s.TransactionNumber,       -- Used to count the number of invoices (Basket Size, AOV, Customer Segment)
     s.SalesDate,               -- The date and specific time frame for the transaction.
-    DATE_TRUNC('month', s.SalesDate) AS SalesMonth, -- Standard timeline for monthly trend analysis
-    DATE_TRUNC('year', s.SalesDate) AS SalesYear,   -- Standard timeline for yearly trend analysis
+    EXTRACT(month FROM s.SalesDate) AS SalesMonth, -- Standard timeline for monthly trend analysis
+    EXTRACT(year FROM s.SalesDate) AS SalesYear,   -- Standard timeline for yearly trend analysis
 
     s.Quantity,                -- Used to calculate volume, analyze profit correlation
+    p.Price AS UnitPrice,
     s.Discount,
     (p.Price * s.Quantity) * (1 - s.Discount) AS NetRevenue,             -- Total actual revenue (after discount)
     (p.Price * s.Quantity) AS GrossRevenue, -- Revenue before discount (used to reference the discount rate)
@@ -39,7 +40,6 @@ SELECT
     -- ==========================================
     s.ProductID,
     p.ProductName,
-    p.Price AS UnitPrice,
     p.Class AS ProductClass,   -- Performance evaluation based on attribute classification.
     p.CategoryName,          -- Analysis of market share, ranking of top/bottom categories
     p.Resistant,               
@@ -70,9 +70,9 @@ SELECT
     -- Optional: Branch/employee geography (rename to avoid duplication with Market)
     e.CityName AS SalesPersonCity,
     e.CountryName AS SalesPersonCountry, -- Geographic workforce analysis, regional performance evaluation.
-    e.BirthDate AS SalesPersonBirthDate, -- Age and generation analysis of the sales force
+    EXTRACT(year FROM e.BirthDate) AS SalesPersonBirthYear, -- Age and generation analysis of the sales force
     e.Gender AS SalesPersonGender, -- Gender analysis of the sales force
-    e.HireDate AS SalesPersonHireDate -- Tenure and career stage analysis of the sales force
+    EXTRACT(year FROM e.HireDate) AS SalesPersonHireYear -- Tenure and career stage analysis of the sales force
 
 FROM fct_sale AS s
 LEFT JOIN  dim_customer AS c ON s.CustomerID = c.CustomerID

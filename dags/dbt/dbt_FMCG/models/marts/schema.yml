@@ -56,3 +56,6 @@ models:
       - name: UnitPrice
         description: "The price of the product at the time of the sale."
         tests: [not_null]
+      - name: Quantity
+        description: "The quantity of the product sold."
+        tests: [not_null]
