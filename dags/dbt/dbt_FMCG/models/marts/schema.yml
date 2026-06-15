@@ -22,7 +22,7 @@ models:
   - name: dim_employees
     description: "Gold layer: Consumer-ready Employee dimension."
     columns:
-      - name: EmployeeID
+      - name: SalesPersonID
         description: "Unique identifier for an employee."
         tests: [unique, not_null]
 
@@ -52,7 +52,7 @@ models:
           - not_null
           - relationships:
               to: ref('dim_employees')
-              field: EmployeeID
+              field: SalesPersonID
       - name: UnitPrice
         description: "The price of the product at the time of the sale."
         tests: [not_null]
