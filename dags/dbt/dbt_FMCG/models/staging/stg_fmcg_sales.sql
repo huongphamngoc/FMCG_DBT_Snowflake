@@ -10,8 +10,10 @@ SELECT
     "Discount" AS Discount,
     "TotalPrice" AS TotalPrice,
     COALESCE("SalesDate", '1200-01-01 00:00:00.000'::TIMESTAMP_NTZ) AS SalesDate,
-    CAST(SalesDate AS DATE) AS SALES_DATE,
-    CAST(SalesDate AS TIME) AS SALES_TIME,
+    CAST(SalesDate AS DATE) AS SALES_DATE,  -- The date and specific time frame for the transaction.
+    CAST(SalesDate AS TIME) AS SALES_TIME,  -- The time of day for the transaction, used for time-based analysis (e.g., peak hours).
+    EXTRACT(month FROM SalesDate) AS SalesMonth, -- Standard timeline for monthly trend analysis
+    EXTRACT(year FROM SalesDate) AS SalesYear,   -- Standard timeline for yearly trend analysis
     CASE 
         WHEN "SalesDate" IS NULL THEN 'Data_Error' 
         ELSE 'Valid' 

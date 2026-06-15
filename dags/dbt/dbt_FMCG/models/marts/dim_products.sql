@@ -7,11 +7,10 @@ categories AS (
 SELECT
     p.ProductID,
     p.ProductName,
-    c.CategoryID,
     c.CategoryName,
     p.Price,
-    p.Class,
-    p.ModifyDate,
+    p.Class AS ProductClass,   -- Performance evaluation based on attribute classification.
+    p.ModifyDate AS ProductLastModified, -- The last date the product information was updated or edited.
     p.Resistant,
     p.IsAllergic,
     p.VitalityDays

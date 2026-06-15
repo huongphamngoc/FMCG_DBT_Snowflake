@@ -6,13 +6,11 @@ locations AS (
 )
 SELECT
     c.CustomerID,
-    c.FirstName,
-    c.MiddleInitial,
-    c.LastName,
-    c.Address,
-    l.CityName,
-    l.CountryName,
-    l.CountryCode,
-    l.Zipcode
+    CONCAT(c.FirstName, ' ', COALESCE(c.MiddleInitial || ' ', ''), c.LastName) AS CustomerFullName,
+    c.Address AS CustomerAddress,
+    l.CityName AS CustomerCity,
+    l.CountryName AS CustomerCountry,
+    l.CountryCode AS CustomerCountryCode,
+    l.Zipcode AS CustomerZipcode
 FROM customers c
 LEFT JOIN locations l ON c.CityID = l.CityID
