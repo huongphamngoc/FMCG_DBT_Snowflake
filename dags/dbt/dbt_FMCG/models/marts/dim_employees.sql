@@ -9,10 +9,8 @@ SELECT
     CONCAT(e.FirstName, ' ', COALESCE(e.MiddleInitial || ' ', ''), e.LastName) AS SalesPersonFullName,
     EXTRACT(year FROM e.BirthDate) AS SalesPersonBirthYear, -- Age and generation analysis of the sales force
     e.Gender AS SalesPersonGender,
-    EXTRACT(year FROM e.HireDate) AS SalesPersonHireYear -- Tenure and career stage analysis of the sales force
+    EXTRACT(year FROM e.HireDate) AS SalesPersonHireYear, -- Tenure and career stage analysis of the sales force
     l.CityName  AS SalesPersonCity,
-    l.CountryName AS SalesPersonCountry,
-    l.CountryCode AS SalesPersonCountryCode,
-    l.Zipcode AS SalesPersonZipcode
+    l.CountryName AS SalesPersonCountry
 FROM employees AS e
 LEFT JOIN locations AS l ON e.CityID = l.CityID
