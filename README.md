@@ -128,7 +128,30 @@ astro dev restart
 
 
 4. **Access Airflow UI:**
-Navigate to `http://localhost:8080/` (default credentials: `admin` / `admin`). Unpause the `DbtDag_FMCG_snowflake` DAG to trigger the pipeline.
+Once the containers are running, access the Airflow UI:
+
+| Setting  | Value                 |
+| -------- | --------------------- |
+| URL      | http://localhost:8080 |
+| Username | admin                 |
+| Password | admin                 |
+
+## 🛑 Stopping the Environment
+
+Stop the running containers while preserving DAG history and metadata:
+
+```bash
+astro dev stop
+```
+
+Perform a complete reset and remove all local Airflow metadata:
+
+```bash
+astro dev kill
+```
+
+---
+
 
 ## 🧪 Testing & Quality Assurance
 
@@ -156,18 +179,5 @@ dags/cosmos_snowflake_dbt.py
 *Unpause the DAG using the toggle switch.
 *Click **Trigger DAG** (▶ Play button).
 
----
 
-## 🛑 Stopping the Environment
 
-Stop the running containers while preserving DAG history and metadata:
-
-```bash
-astro dev stop
-```
-
-Perform a complete reset and remove all local Airflow metadata:
-
-```bash
-astro dev kill
-```
