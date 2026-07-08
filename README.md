@@ -106,22 +106,23 @@ AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{
 
 
 3. **Start the Airflow environment:**
-The Dockerfile is configured to create a dedicated Python virtual environment named dbt_venv_snowflake specifically for dbt-snowflake.
+The `Dockerfile` is configured to create a dedicated Python virtual environment named `dbt_venv_snowflake` specifically for `dbt-snowflake`.
 
 This approach prevents dependency conflicts between:
 
-Airflow providers
-dbt adapters
+* Airflow providers
+* dbt adapters
+
 Start the local environment:
 
 ```bash
 astro dev start
-
 ```
-Note: If you modify the Dockerfile or requirements.txt, rebuild the environment using:
+
+> **Note:** If you modify the `Dockerfile` or `requirements.txt`, rebuild the environment using:
+
 ```bash
 astro dev restart
-
 ```
 *Note: The `Dockerfile` automatically sets up a Python virtual environment (`dbt_venv`) and installs `dbt-snowflake` to ensure compatibility and isolation for Cosmos.*
 
