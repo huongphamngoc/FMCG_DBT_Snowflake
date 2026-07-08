@@ -81,16 +81,51 @@ cd fmcg_dbt_snowflake
 
 
 2. **Configure Snowflake Connection:**
-You will need to set up an Airflow connection for Snowflake. When Airflow is running, navigate to the Airflow UI > Admin > Connections and add a connection with the ID `snowflake_default`.
-Ensure your Snowflake user has permissions to run `COPY INTO` commands and execute dbt models.
-3. **Start the Airflow environment:**
-```bash
-astro dev start
+Create a .env file in the project root directory (you can copy .env_example if available) and configure your Airflow connection to Snowflake.
+
+Astronomer Cosmos uses this connection to execute dbt models.
+```env
+DBT_ROOT_PATH="include/dbt"
+
+# Snowflake Connection string for Airflow/Cosmos
+AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{
+    "conn_type": "snowflake",
+    "login": "<your_snowflake_username>",
+    "password": "<your_snowflake_password>",
+    "schema": "<your_schema>",
+    "extra": {
+        "account": "<your_account_identifier>",
+        "warehouse": "<your_warehouse>",
+        "database": "<your_database>",
+        "region": "<your_region>",
+        "role": "<your_role>"
+    }
+}'
 
 ```
 
 
+3. **Start the Airflow environment:**
+The Dockerfile is configured to create a dedicated Python virtual environment named dbt_venv_snowflake specifically for dbt-snowflake.
+
+This approach prevents dependency conflicts between:
+
+Airflow providers
+dbt adapters
+Start the local environment:
+
+```bash
+astro dev start
+
+```
+Note: If you modify the Dockerfile or requirements.txt, rebuild the environment using:
+```bash
+astro dev restart
+
+```
 *Note: The `Dockerfile` automatically sets up a Python virtual environment (`dbt_venv`) and installs `dbt-snowflake` to ensure compatibility and isolation for Cosmos.*
+
+
 4. **Access Airflow UI:**
 Navigate to `http://localhost:8080/` (default credentials: `admin` / `admin`). Unpause the `DbtDag_FMCG_snowflake` DAG to trigger the pipeline.
 
@@ -102,5 +137,36 @@ Data quality is enforced using built-in dbt tests defined in `schema.yml` files.
 * Foreign key relationship tests between the Fact table and Dimension tables.
 * Custom generic macros (e.g., `is_non_negative`) ensuring metrics like `Price`, `Quantity`, and `Discount` are logically valid.
 
+
+5. **Run the Pipeline:**
+
+*Open the Airflow UI.
+*Locate the DAG named:
+
+```text
+DbtDag_FMCG_snowflake
 ```
 
+Defined in:
+
+```text
+dags/cosmos_snowflake_dbt.py
+```
+*Unpause the DAG using the toggle switch.
+*Click **Trigger DAG** (▶ Play button).
+
+---
+
+## 🛑 Stopping the Environment
+
+Stop the running containers while preserving DAG history and metadata:
+
+```bash
+astro dev stop
+```
+
+Perform a complete reset and remove all local Airflow metadata:
+
+```bash
+astro dev kill
+```
