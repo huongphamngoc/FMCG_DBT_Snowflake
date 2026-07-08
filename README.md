@@ -136,6 +136,23 @@ Once the containers are running, access the Airflow UI:
 | Username | admin                 |
 | Password | admin                 |
 
+5. **Run the Pipeline:**
+
+*Open the Airflow UI.
+*Locate the DAG named:
+
+```text
+DbtDag_FMCG_snowflake
+```
+
+Defined in:
+
+```text
+dags/cosmos_snowflake_dbt.py
+```
+*Unpause the DAG using the toggle switch.
+*Click **Trigger DAG** (▶ Play button).
+
 ## 🛑 Stopping the Environment
 
 Stop the running containers while preserving DAG history and metadata:
@@ -160,24 +177,5 @@ Data quality is enforced using built-in dbt tests defined in `schema.yml` files.
 * `not_null` and `unique` checks on primary keys (e.g., `SalesID`, `CustomerID`).
 * Foreign key relationship tests between the Fact table and Dimension tables.
 * Custom generic macros (e.g., `is_non_negative`) ensuring metrics like `Price`, `Quantity`, and `Discount` are logically valid.
-
-
-5. **Run the Pipeline:**
-
-*Open the Airflow UI.
-*Locate the DAG named:
-
-```text
-DbtDag_FMCG_snowflake
-```
-
-Defined in:
-
-```text
-dags/cosmos_snowflake_dbt.py
-```
-*Unpause the DAG using the toggle switch.
-*Click **Trigger DAG** (▶ Play button).
-
 
 
