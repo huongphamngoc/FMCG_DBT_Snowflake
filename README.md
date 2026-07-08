@@ -178,4 +178,3 @@ Data quality is enforced using built-in dbt tests defined in `schema.yml` files.
 * Foreign key relationship tests between the Fact table and Dimension tables.
 * Custom generic macros (e.g., `is_non_negative`) ensuring metrics like `Price`, `Quantity`, and `Discount` are logically valid.
 
-
