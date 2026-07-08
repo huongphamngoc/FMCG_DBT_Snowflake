@@ -10,7 +10,7 @@ This project implements a Modern Data Stack (MDS) pipeline for a Fast-Moving Con
 * **Transformation:** dbt (Data Build Tool)
 * **Integration:** Astronomer Cosmos (translates dbt models into Airflow Tasks)
 * **Containerization:** Docker & Astro Runtime (`astrocrpublic.azurecr.io/runtime:3.0-5`)
-
+![Data Architecture](docs/FMCG.png)
 ## 📂 Project Structure
 ```text
 FMCG_DBT_Snowflake/
