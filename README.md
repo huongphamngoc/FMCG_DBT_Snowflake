@@ -167,8 +167,6 @@ Perform a complete reset and remove all local Airflow metadata:
 astro dev kill
 ```
 
----
-
 
 ## 🧪 Testing & Quality Assurance
 
